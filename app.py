@@ -36,19 +36,17 @@ if menu == "Add Book":
                 "December",
             ],
         )
-        year = st.number_input("Year", min_value=1900, max_value=2100, step=1)
+        year = st.number_input("Year", min_value=2024, max_value=2100, step=1)
         title = st.text_input("Title")
         author_last = st.text_input("Author Last Name")
         author_first = st.text_input("Author First Name")
         genre = st.text_input("Genre")
         subgenre = st.text_input("Subgenre")
         pub_year = st.number_input(
-            "Publication Year", min_value=1000, max_value=2100, step=1
+            "Publication Year", min_value=1850, max_value=2100, step=1
         )
         country = st.text_input("Country")
-        rating = st.number_input(
-            "Rating (1-10)", min_value=0.0, max_value=10.0, step=0.1
-        )
+        rating = st.number_input("Rating (1-5)", min_value=0.0, max_value=5.0, step=0.5)
         pages = st.number_input("Number of Pages", min_value=1, step=1)
         book_format = st.selectbox(
             "Format", ["Hardcover", "Paperback", "Ebook", "Audiobook"]

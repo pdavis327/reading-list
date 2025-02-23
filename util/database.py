@@ -5,10 +5,10 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-conn_string = f"dbname={db} user={user} host={host} port={port}"
+# conn_string = f"dbname={db} user={user} host={host} port={port}"
 
-# Connect to the PostgreSQL database
-conn = psycopg2.connect(conn_string)
+# # Connect to the PostgreSQL database
+# conn = psycopg2.connect(conn_string)
 
 
 class BookDatabase:
@@ -18,22 +18,22 @@ class BookDatabase:
         self.user = os.getenv("USER")
         self.host = os.getenv("HOST")
         self.port = os.getenv("PORT")
+        self.table = os.getenv("SQL_TABLE")
         self.conn = None  # Store the connection
 
     def connect(self):
         """Establish a database connection if not already connected."""
         if self.conn is None or self.conn.closed:
-            self.conn = psycopg2.connect(
-                dbname=self.dbname, user=self.user, host=self.host, port=self.port
-            )
+            conn_string = f"dbname={self.dbname} user={self.user} host={self.host} port={self.port}"
+            self.conn = psycopg2.connect(conn_string)
 
     def create_table(self):
-        """Create the books table if it does not already exist."""
+        """Create the reading_list table if it does not already exist."""
         self.connect()
         with self.conn.cursor() as cur:
             cur.execute(
-                """
-                CREATE TABLE IF NOT EXISTS books (
+                f"""
+                CREATE TABLE IF NOT EXISTS {self.table} (
                     id SERIAL PRIMARY KEY,
                     reader VARCHAR(100),
                     month VARCHAR(10),
@@ -48,7 +48,7 @@ class BookDatabase:
                     rating NUMERIC(10, 2),
                     pages INT,
                     format VARCHAR(10),
-                    keywords TEXT,
+                    keys TEXT,
                     pov VARCHAR(10),
                     movie BOOLEAN
                 )
@@ -71,7 +71,7 @@ class BookDatabase:
         rating,
         pages,
         book_format,
-        keywords,
+        keys,
         pov,
         movie,
     ):
@@ -79,8 +79,8 @@ class BookDatabase:
         self.connect()
         with self.conn.cursor() as cur:
             cur.execute(
-                """
-                INSERT INTO books (reader, month, year, title, author_last, author_first, genre, subgenre, pub_year, country, rating, pages, format, keywords, pov, movie)
+                f"""
+                INSERT INTO {self.table} (reader, month, year, title, author_last, author_first, genre, subgenre, pub_year, country, rating, pages, format, keys, pov, movie)
                 VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)
             """,
                 (
@@ -97,7 +97,7 @@ class BookDatabase:
                     rating,
                     pages,
                     book_format,
-                    keywords,
+                    keys,
                     pov,
                     movie,
                 ),
@@ -107,7 +107,7 @@ class BookDatabase:
     def fetch_data(self):
         """Fetch all book records from the database as a Pandas DataFrame."""
         self.connect()
-        df = pd.read_sql("SELECT * FROM books", self.conn)
+        df = pd.read_sql(f"SELECT * FROM {self.table}", self.conn)
         return df
 
     def update_book(self, book_id, **kwargs):
@@ -120,14 +120,14 @@ class BookDatabase:
         values = list(kwargs.values()) + [book_id]
 
         with self.conn.cursor() as cur:
-            cur.execute(f"UPDATE books SET {columns} WHERE id = %s", values)
+            cur.execute(f"UPDATE {self.table} SET {columns} WHERE id = %s", values)
             self.conn.commit()
 
     def delete_book(self, book_id):
         """Delete a book record by ID."""
         self.connect()
         with self.conn.cursor() as cur:
-            cur.execute("DELETE FROM books WHERE id = %s", (book_id,))
+            cur.execute(f"DELETE FROM {self.table} WHERE id = %s", (book_id,))
             self.conn.commit()
 
     def search_books(self, **kwargs):
@@ -140,7 +140,7 @@ class BookDatabase:
         values = list(kwargs.values())
 
         with self.conn.cursor() as cur:
-            cur.execute(f"SELECT * FROM books WHERE {conditions}", values)
+            cur.execute(f"SELECT * FROM {self.table} WHERE {conditions}", values)
             results = cur.fetchall()
 
         return results

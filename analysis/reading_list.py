@@ -22,15 +22,9 @@ import os
 import sys
 
 sys.path.append(os.path.abspath("../"))
-from util.database import BookDatabase
+
 
 load_dotenv()
-
-# %%
-db = BookDatabase()
-
-# %%
-db.fetch_data()
 
 # %%
 host = os.getenv("HOST")
@@ -49,7 +43,7 @@ conn = psycopg2.connect(conn_string)
 
 
 # %%
-books = pd.read_csv(table)
+books = pd.read_csv(csv)
 
 # %%
 conn.rollback()
@@ -109,3 +103,5 @@ for i in cur.fetchall():
 
 conn.commit()
 cur.close()
+
+# %%
