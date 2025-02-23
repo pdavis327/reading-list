@@ -19,15 +19,26 @@ import pandas as pd
 import psycopg2
 from dotenv import load_dotenv
 import os
+import sys
+
+sys.path.append(os.path.abspath("../"))
+from util.database import BookDatabase
 
 load_dotenv()
+
+# %%
+db = BookDatabase()
+
+# %%
+db.fetch_data()
 
 # %%
 host = os.getenv("HOST")
 port = os.getenv("PORT")
 db = os.getenv("DBNAME")
 user = os.getenv("USER")
-table = os.getenv("READING_LIST")
+csv = os.getenv("TABLE_IN")
+table = os.getenv("SQL_TABLE")
 
 # %%
 # Construct the connection string
@@ -73,8 +84,8 @@ cur.execute(
 
 
 # %%
-sql_copy = f"""COPY reading_list
-FROM '{table}'
+sql_copy = f"""COPY {table}
+FROM '{csv}'
 DELIMITER ','
 CSV HEADER QUOTE '"';
 """
