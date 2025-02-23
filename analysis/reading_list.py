@@ -19,6 +19,10 @@ import pandas as pd
 import psycopg2
 from dotenv import load_dotenv
 import os
+import sys
+
+sys.path.append(os.path.abspath("../"))
+
 
 load_dotenv()
 
@@ -27,7 +31,8 @@ host = os.getenv("HOST")
 port = os.getenv("PORT")
 db = os.getenv("DBNAME")
 user = os.getenv("USER")
-table = os.getenv("READING_LIST")
+csv = os.getenv("TABLE_IN")
+table = os.getenv("SQL_TABLE")
 
 # %%
 # Construct the connection string
@@ -38,7 +43,7 @@ conn = psycopg2.connect(conn_string)
 
 
 # %%
-books = pd.read_csv(table)
+books = pd.read_csv(csv)
 
 # %%
 conn.rollback()
@@ -73,8 +78,8 @@ cur.execute(
 
 
 # %%
-sql_copy = f"""COPY reading_list
-FROM '{table}'
+sql_copy = f"""COPY {table}
+FROM '{csv}'
 DELIMITER ','
 CSV HEADER QUOTE '"';
 """
@@ -98,3 +103,5 @@ for i in cur.fetchall():
 
 conn.commit()
 cur.close()
+
+# %%
