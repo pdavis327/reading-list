@@ -5,11 +5,6 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-# conn_string = f"dbname={db} user={user} host={host} port={port}"
-
-# # Connect to the PostgreSQL database
-# conn = psycopg2.connect(conn_string)
-
 
 class BookDatabase:
     def __init__(self):

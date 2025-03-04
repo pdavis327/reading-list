@@ -1,5 +1,4 @@
 import streamlit as st
-import pandas as pd
 from util.database import BookDatabase
 
 # Initialize the database
@@ -86,15 +85,15 @@ elif menu == "View Books":
 # Update Book Section
 elif menu == "Update Book":
     st.subheader("✏️ Update a Book Record")
-    book_id = st.number_input("Enter Book ID to Update", min_value=1, step=1)
+    book_id = st.number_input("Enter Book ID to Update", min_value=0, step=1)
 
     if st.button("Load Book Details"):
         books = db.search_books(id=book_id)
         if books:
             book = books[0]  # Load first match
-            updated_title = st.text_input("Title", value=book[4])
+            updated_title = st.text_input("Title", value=book[3])
             updated_rating = st.number_input(
-                "Rating", min_value=0.0, max_value=10.0, step=0.1, value=book[11]
+                "Rating", min_value=0.0, max_value=5.0, step=0.5, value= book[10]
             )
 
             if st.button("Update Book"):
