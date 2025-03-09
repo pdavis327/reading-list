@@ -14,12 +14,13 @@ class BookDatabase:
         self.host = os.getenv("HOST")
         self.port = os.getenv("PORT")
         self.table = os.getenv("SQL_TABLE")
+        self.password = os.getenv("DB_PASSWORD")
         self.conn = None  # Store the connection
 
     def connect(self):
         """Establish a database connection if not already connected."""
         if self.conn is None or self.conn.closed:
-            conn_string = f"dbname={self.dbname} user={self.user} host={self.host} port={self.port}"
+            conn_string = f"dbname={self.dbname} user={self.user} password={self.password} host={self.host} port={self.port}"
             self.conn = psycopg2.connect(conn_string)
 
     def create_table(self):
