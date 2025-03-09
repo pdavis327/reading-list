@@ -82,31 +82,31 @@ elif menu == "View Books":
     df = db.fetch_data()
     st.dataframe(df)
 
-# Update Book Section
-elif menu == "Update Book":
-    st.subheader("✏️ Update a Book Record")
-    book_id = st.number_input("Enter Book ID to Update", min_value=0, step=1)
+# # Update Book Section
+# elif menu == "Update Book":
+#     st.subheader("✏️ Update a Book Record")
+#     book_id = st.number_input("Enter Book ID to Update", min_value=0, step=1)
 
-    if st.button("Load Book Details"):
-        books = db.search_books(id=book_id)
-        if books:
-            book = books[0]  # Load first match
-            updated_title = st.text_input("Title", value=book[3])
-            updated_rating = st.number_input(
-                "Rating", min_value=0.0, max_value=5.0, step=0.5, value= book[10]
-            )
+#     if st.button("Load Book Details"):
+#         books = db.search_books(id=book_id)
+#         if books:
+#             book = books[0]  # Load first match
+#             updated_title = st.text_input("Title", value=book[3])
+#             updated_rating = st.number_input(
+#                 "Rating", min_value=0.0, max_value=5.0, step=0.5, value= book[10]
+#             )
 
-            if st.button("Update Book"):
-                db.update_book(book_id, title=updated_title, rating=updated_rating)
-                st.success(f"✅ Book ID {book_id} updated successfully!")
-        else:
-            st.error("⚠️ No book found with that ID.")
+#             if st.button("Update Book"):
+#                 db.update_book(book_id, title=updated_title, rating=updated_rating)
+#                 st.success(f"✅ Book ID {book_id} updated successfully!")
+#         else:
+#             st.error("⚠️ No book found with that ID.")
 
-# Delete Book Section
-elif menu == "Delete Book":
-    st.subheader("🗑 Delete a Book")
-    book_id = st.number_input("Enter Book ID to Delete", min_value=1, step=1)
+# # Delete Book Section
+# elif menu == "Delete Book":
+#     st.subheader("🗑 Delete a Book")
+#     book_id = st.number_input("Enter Book ID to Delete", min_value=1, step=1)
 
-    if st.button("Delete Book"):
-        db.delete_book(book_id)
-        st.success(f"✅ Book ID {book_id} deleted successfully!")
+#     if st.button("Delete Book"):
+#         db.delete_book(book_id)
+#         st.success(f"✅ Book ID {book_id} deleted successfully!")

@@ -1,8 +1,0 @@
-reader,month,year,title,author_last,author_first,genre,subgenre,pub_year,country,rating,pages,format,keys,pov,movie
-Pete,January,2025,The War of the Worlds,Wells,H.G.,fiction,science fiction,1898,United Kingdom,2.5,145,book,"alien, dystopian, war, space",first,yes
-Pete,January,2025,The Remains of the Day,Ishiguro,Kazou,fiction,historical fiction,1989,United Kingdom,4,245,book,"literary, introspective, historical, emotion, regret, love, class",first,yes
-Pete,December,2024,Klara and the Sun,Ishiguro,Kazou,fiction,science fiction,2021,United Kingdom,4.5,303,book,"dystopian, AI, existentialism, technology, consciousness",first,yes
-Pete,February,2025,Never Let Me Go,Ishiguro,Kazou,fiction,science fiction,2005,United Kingdom,4.5,288,book,"dystopian, emotion, love, trauma, clone acceptance",first,yes
-Bradley,January,2025,The Hobbit,Tolkien,J.R.R,fiction,fantasy,1937,United Kingdom,4.5,374,book,"high fantasy, children, war, bravery, classic",third,yes
-Pete,January,2025,Kafka on the Shore,Murakami,Haruki,Fiction,magical realism,2002,Japan,4.5,467,book,"metaphysical, sex, mind and body, consciousness, symbolism",first,no
-Pete,February,2025,The Women,Hannah,Kristen,Fiction,historical fiction,2024,United States,3,480,book,"war, vietnam, femanism, patriotism, protest, love, history",first,no

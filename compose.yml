@@ -13,6 +13,7 @@ services:
       - readnet
     volumes:
       - readvol:/var/lib/postgresql/data
+      # - reading-list:/docker-entrypoint-initdb.d
 
   app:
     build:
