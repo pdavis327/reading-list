@@ -11,6 +11,8 @@ To add pre-commit hooks, run the following command:
 pre-commit install
 ```
 
+Create a .env similar to .env example and update
+
 You'll need a populated database.
 Place a db.sql file within the main directory and update and uncomment db volume in compose.yml
 to have the container automatically initialize a databse

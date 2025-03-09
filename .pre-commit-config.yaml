@@ -1,8 +1,5 @@
 default_install_hook_types: [pre-commit]
 
-# default_language_version:
-#     python: python:3.11.10
-
 exclude: '^$'
 
 repos:
