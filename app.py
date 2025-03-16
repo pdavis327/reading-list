@@ -10,7 +10,7 @@ st.title("📚 Book Tracker App")
 
 # Sidebar Navigation
 menu = st.sidebar.radio(
-    "Navigation", ["Add Book", "View Books", "Update Book", "Delete Book"]
+    "Navigation", ["Add Book", "View Books"]#, "Update Book", "Delete Book"]
 )
 
 # Add Book Section

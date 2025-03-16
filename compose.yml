@@ -13,7 +13,7 @@ services:
       - readnet
     volumes:
       - readvol:/var/lib/postgresql/data
-      # - reading-list:/docker-entrypoint-initdb.d # update paths to have compose init a sql posrtgres db from .sql file
+      # - /home/pdavis/davis/repos/reading-list:/docker-entrypoint-initdb.d # update paths to have compose init a sql posrtgres db from .sql file
 
   app:
     build:
