@@ -13,7 +13,13 @@ services:
       - readnet
     volumes:
       - readvol:/var/lib/postgresql/data
-      # - /home/pdavis/davis/repos/reading-list:/docker-entrypoint-initdb.d # update paths to have compose init a sql posrtgres db from .sql file
+      # - /home/pdavis/davis/repos/reading-list:/docker-entrypoint-initdb.d:Z
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U petedavis"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
 
   app:
     build:
@@ -25,6 +31,9 @@ services:
       - "8501:8501"
     networks:
       - readnet
+    depends_on:
+      db:
+        condition: service_healthy
 
 networks:
   readnet:
