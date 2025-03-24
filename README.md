@@ -2,7 +2,7 @@
 
 ## Introduction
 
-This repository contains a small app to manage and track reading. The application provides functionalities to add, update, delete, and search for books in a PostgreSQL database.
+This repository contains a small app to manage and track reading. The application provides functionalities to add and search books in a PostgreSQL database.
 
 ## Prerequisites
 
