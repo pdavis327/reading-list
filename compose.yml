@@ -5,17 +5,13 @@ services:
       - .env
     ports:
       - "5432:5432"
-    environment:
-      POSTGRES_USER: petedavis
-      POSTGRES_PASSWORD: password
-      POSTGRES_DB: reading
     networks:
       - readnet
     volumes:
       - readvol:/var/lib/postgresql/data
-      # - /home/pdavis/davis/repos/reading-list:/docker-entrypoint-initdb.d:Z
+      # - ./:/docker-entrypoint-initdb.d:Z
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U petedavis"]
+      test: ["CMD-SHELL", "pg_isready -d $${DBNAME} -U $${USER}"]
       interval: 10s
       timeout: 5s
       retries: 5
